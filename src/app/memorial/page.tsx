@@ -53,9 +53,9 @@ export default function MemorialPage() {
   }
 
   const CONN = [
-    { i:'JS', g:'linear-gradient(135deg,#2d4a6a,#4a6a8a)', n:'José Sousa', r:'marido' },
-    { i:'PS', g:'linear-gradient(135deg,#2d5a2d,#4a8a4a)', n:'Pedro Sousa', r:'filho' },
-    { i:'AS', g:'linear-gradient(135deg,#6a2d2d,#8a4a4a)', n:'Ana Sousa', r:'filha' },
+    { i:'JS', g:'linear-gradient(135deg,#2d4a6a,#4a6a8a)', n:'José Sousa', r:'husband', slug:'jose-sousa' },
+    { i:'PS', g:'linear-gradient(135deg,#2d5a2d,#4a8a4a)', n:'Pedro Sousa', r:'son', slug:'pedro-sousa' },
+    { i:'AS', g:'linear-gradient(135deg,#6a2d2d,#8a4a4a)', n:'Ana Sousa', r:'daughter', slug:'ana-sousa' },
   ]
 
   if (loading) return <AppShell><div style={{padding:60,textAlign:'center',color:'var(--text3)',fontFamily:'Playfair Display,serif',fontSize:18}}>A carregar...</div></AppShell>
