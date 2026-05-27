@@ -8,6 +8,7 @@ const NAV = [
   { href: '/explorar',     icon: Search,   label: 'Explorar' },
   { href: '/notificacoes', icon: Bell,     label: 'Notificações' },
   { href: '/memoriais',    icon: BookOpen, label: 'Memoriais' },
+  { href: '/flores',        icon: Flower2,  label: 'Flowers' },
   { href: '/perfil',       icon: User,     label: 'Perfil' },
 ]
 
