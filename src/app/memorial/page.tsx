@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import AppShell from '@/components/AppShell'
 import CemeteryScene from '@/components/CemeteryScene'
@@ -88,7 +89,7 @@ export default function MemorialPage() {
         </div>
 
         <div style={{background:'var(--card)',padding:'14px 24px',display:'flex',gap:8,borderBottom:'1px solid var(--sep)',flexWrap:'wrap'}}>
-          <button style={{display:'flex',alignItems:'center',gap:7,padding:'10px 22px',borderRadius:99,background:'var(--gold)',color:'#fff',border:'none',fontSize:13,fontWeight:500,cursor:'pointer'}}><Flower2 size={15}/> Deixar flores</button>
+          <Link href='/flores' style={{display:'flex',alignItems:'center',gap:7,padding:'10px 22px',borderRadius:99,background:'var(--gold)',color:'#fff',border:'none',fontSize:13,fontWeight:500,cursor:'pointer',textDecoration:'none'}}><Flower2 size={15}/> Leave flowers</Link>
           <button style={{display:'flex',alignItems:'center',gap:7,padding:'10px 18px',borderRadius:99,border:'1px solid var(--sep2)',background:'transparent',color:'var(--text2)',fontSize:13,cursor:'pointer'}}><Plus size={15}/> Memória</button>
           <button onClick={()=>setFollowed(f=>!f)} style={{display:'flex',alignItems:'center',gap:7,padding:'10px 18px',borderRadius:99,border:`1px solid ${followed?'var(--gold-b)':'var(--sep2)'}`,background:followed?'var(--gold-t)':'transparent',color:followed?'var(--gold)':'var(--text2)',fontSize:13,cursor:'pointer',transition:'all .2s'}}><Heart size={15} fill={followed?'currentColor':'none'}/> {followed?'A seguir':'Seguir'}</button>
           <button style={{display:'flex',alignItems:'center',gap:7,padding:'10px 18px',borderRadius:99,border:'1px solid var(--sep2)',background:'transparent',color:'var(--text2)',fontSize:13,cursor:'pointer'}}><Share2 size={15}/> Partilhar</button>
