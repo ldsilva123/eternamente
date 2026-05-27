@@ -26,8 +26,12 @@ export default function MemorialPage({ params }: { params: { slug: string } }) {
 
   useEffect(() => {
     async function load() {
-      const sb = createClient()
-      const { data: m } = await sb.from('memorials').select('*').eq('slug', slug).single()
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/memorials?slug=eq.${slug}&select=*&limit=1`,
+        { headers: { 'apikey': process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, 'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!}` } }
+      )
+      const arr = await res.json()
+      const m = arr[0] || null
       console.log('memorial query result:', m, 'slug:', slug)
       if (m) {
         setMemorial(m)
