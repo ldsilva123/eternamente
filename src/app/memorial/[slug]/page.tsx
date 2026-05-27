@@ -28,6 +28,7 @@ export default function MemorialPage({ params }: { params: { slug: string } }) {
     async function load() {
       const sb = createClient()
       const { data: m } = await sb.from('memorials').select('*').eq('slug', slug).single()
+      console.log('memorial query result:', m, 'slug:', slug)
       if (m) {
         setMemorial(m)
         const { data: c } = await sb.from('comments').select('*').eq('memorial_id', m.id).order('created_at',{ascending:false})
