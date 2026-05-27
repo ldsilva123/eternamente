@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Search, Bell, BookOpen, User, Flower2 } from 'lucide-react'
+import { Home, Search, Bell, BookOpen, User, Flower2, Leaf } from 'lucide-react'
 
 const NAV = [
   { href: '/feed',         icon: Home,     label: 'Feed' },
@@ -32,7 +32,7 @@ export default function AppShell({ children, unreadCount = 0 }: {
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           marginBottom: 12, color: '#f0e8d8', textDecoration: 'none',
         }}>
-          <Flower2 size={17} />
+          <Leaf size={17} />
         </Link>
         {NAV.map(({ href, icon: Icon, label }) => {
           const active = path.startsWith(href)
