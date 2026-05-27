@@ -109,10 +109,10 @@ export default function MemorialPage() {
           <div style={{display:'flex',alignItems:'center',gap:6,fontSize:11,color:'var(--text3)',fontWeight:500,letterSpacing:'0.06em',textTransform:'uppercase',marginBottom:14}}><GitBranch size={12}/> Família</div>
           <div style={{display:'flex',gap:10,flexWrap:'wrap'}}>
             {CONN.map(c=>(
-              <button key={c.n} style={{display:'flex',alignItems:'center',gap:10,background:'var(--bg)',borderRadius:12,padding:'10px 18px 10px 10px',border:'1px solid var(--sep2)',cursor:'pointer'}}>
+              <Link key={c.n} href={`/memorial/${c.slug}`} style={{display:'flex',alignItems:'center',gap:10,background:'var(--bg)',borderRadius:12,padding:'10px 18px 10px 10px',border:'1px solid var(--sep2)',cursor:'pointer',textDecoration:'none'}}>
                 <div style={{width:34,height:34,borderRadius:'50%',background:c.g,display:'flex',alignItems:'center',justifyContent:'center',fontSize:11,fontWeight:600,color:'#fff'}}>{c.i}</div>
                 <div><div style={{fontSize:13,fontWeight:500,color:'var(--text)'}}>{c.n}</div><div style={{fontSize:11,color:'var(--text3)'}}>{c.r}</div></div>
-              </button>
+              </Link>
             ))}
             <button style={{display:'flex',alignItems:'center',gap:6,borderRadius:12,padding:'10px 18px',border:'1px dashed var(--sep2)',cursor:'pointer',background:'transparent',color:'var(--text3)',fontSize:13}}><Plus size={13}/> Adicionar</button>
           </div>
