@@ -18,6 +18,8 @@ export default function MemorialPage() {
   const [comments, setComments] = useState<Comment[]>([])
   const [newComment, setNewComment] = useState('')
   const [followed, setFollowed] = useState(false)
+  const [showShare, setShowShare] = useState(false)
+  const [copied, setCopied] = useState(false)
   const [loading, setLoading] = useState(true)
   const [posting, setPosting] = useState(false)
 
@@ -59,6 +61,13 @@ export default function MemorialPage() {
   if (loading) return <AppShell><div style={{padding:60,textAlign:'center',color:'var(--text3)',fontFamily:'Playfair Display,serif',fontSize:18}}>A carregar...</div></AppShell>
   if (!memorial) return <AppShell><div style={{padding:60,textAlign:'center',color:'var(--text3)'}}>Memorial não encontrado.</div></AppShell>
 
+  const shareUrl = typeof window !== 'undefined' ? window.location.href : 'https://lv-forever.com/memorial'
+  const shareText = `In memory of ${memorial.name} — LV Forever`
+  function copyLink() {
+    navigator.clipboard.writeText(shareUrl)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
   const ini = memorial.name.split(' ').map((w:string)=>w[0]).slice(0,2).join('')
 
   return (
@@ -92,7 +101,8 @@ export default function MemorialPage() {
           <Link href='/flores' style={{display:'flex',alignItems:'center',gap:7,padding:'10px 22px',borderRadius:99,background:'var(--gold)',color:'#fff',border:'none',fontSize:13,fontWeight:500,cursor:'pointer',textDecoration:'none'}}><Flower2 size={15}/> Leave flowers</Link>
           <button style={{display:'flex',alignItems:'center',gap:7,padding:'10px 18px',borderRadius:99,border:'1px solid var(--sep2)',background:'transparent',color:'var(--text2)',fontSize:13,cursor:'pointer'}}><Plus size={15}/> Memória</button>
           <button onClick={()=>setFollowed(f=>!f)} style={{display:'flex',alignItems:'center',gap:7,padding:'10px 18px',borderRadius:99,border:`1px solid ${followed?'var(--gold-b)':'var(--sep2)'}`,background:followed?'var(--gold-t)':'transparent',color:followed?'var(--gold)':'var(--text2)',fontSize:13,cursor:'pointer',transition:'all .2s'}}><Heart size={15} fill={followed?'currentColor':'none'}/> {followed?'A seguir':'Seguir'}</button>
-          <button style={{display:'flex',alignItems:'center',gap:7,padding:'10px 18px',borderRadius:99,border:'1px solid var(--sep2)',background:'transparent',color:'var(--text2)',fontSize:13,cursor:'pointer'}}><Share2 size={15}/> Partilhar</button>
+          <button onClick={()=>setShowShare(s=>!s)} style={{display:'flex',alignItems:'center',gap:7,padding:'10px 18px',borderRadius:99,border:'1px solid var(--sep2)',background:'transparent',color:'var(--text2)',fontSize:13,cursor:'pointer'}}><Share2 size={15}/> Share</button>
+      {showShare&&(<div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.5)',zIndex:100,display:'flex',alignItems:'flex-end',justifyContent:'center'}} onClick={()=>setShowShare(false)}><div style={{background:'var(--card)',borderRadius:'20px 20px 0 0',padding:'24px',width:'100%',maxWidth:480}} onClick={e=>e.stopPropagation()}><div style={{fontSize:16,fontWeight:500,color:'var(--text)',marginBottom:20,textAlign:'center'}}>Share this memorial</div><div style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:12,marginBottom:20}}><a href={`https://wa.me/?text=${encodeURIComponent(shareText+' '+shareUrl)}`} target="_blank" rel="noopener" style={{display:'flex',flexDirection:'column',alignItems:'center',gap:8,textDecoration:'none'}}><div style={{width:52,height:52,borderRadius:16,background:'#25D366',display:'flex',alignItems:'center',justifyContent:'center',fontSize:24}}>📱</div><span style={{fontSize:11,color:'var(--text2)'}}>WhatsApp</span></a><a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`} target="_blank" rel="noopener" style={{display:'flex',flexDirection:'column',alignItems:'center',gap:8,textDecoration:'none'}}><div style={{width:52,height:52,borderRadius:16,background:'#1877F2',display:'flex',alignItems:'center',justifyContent:'center',fontSize:24}}>📘</div><span style={{fontSize:11,color:'var(--text2)'}}>Facebook</span></a><a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`} target="_blank" rel="noopener" style={{display:'flex',flexDirection:'column',alignItems:'center',gap:8,textDecoration:'none'}}><div style={{width:52,height:52,borderRadius:16,background:'#000',display:'flex',alignItems:'center',justifyContent:'center',fontSize:24}}>🐦</div><span style={{fontSize:11,color:'var(--text2)'}}>X</span></a><a href={`mailto:?subject=${encodeURIComponent(shareText)}&body=${encodeURIComponent(shareUrl)}`} style={{display:'flex',flexDirection:'column',alignItems:'center',gap:8,textDecoration:'none'}}><div style={{width:52,height:52,borderRadius:16,background:'var(--bg2)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:24}}>✉️</div><span style={{fontSize:11,color:'var(--text2)'}}>Email</span></a><button onClick={()=>{navigator.clipboard.writeText(shareUrl);alert('Link copied! Open Instagram and paste it in your story or bio.')}} style={{display:'flex',flexDirection:'column',alignItems:'center',gap:8,background:'transparent',border:'none',cursor:'pointer',padding:0}}><div style={{width:52,height:52,borderRadius:16,background:'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:24}}>📸</div><span style={{fontSize:11,color:'var(--text2)'}}>Instagram</span></button></div><button onClick={copyLink} style={{width:'100%',padding:'12px',borderRadius:12,border:'1px solid var(--sep2)',background:'var(--bg)',color:'var(--text)',fontSize:13,cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',gap:8}}>{copied?'✅ Link copied!':'🔗 Copy link'}</button></div></div>)}
         </div>
 
         <div style={{background:'var(--card)',padding:'16px 24px',borderBottom:'1px solid var(--sep)'}}>
