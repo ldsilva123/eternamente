@@ -14,6 +14,7 @@ function fmt(d: string) {
 }
 
 export default function MemorialPage({ params }: { params: { slug: string } }) {
+  const slug = params.slug
   const [memorial, setMemorial] = useState<Memorial | null>(null)
   const [comments, setComments] = useState<Comment[]>([])
   const [newComment, setNewComment] = useState('')
@@ -26,7 +27,7 @@ export default function MemorialPage({ params }: { params: { slug: string } }) {
   useEffect(() => {
     async function load() {
       const sb = createClient()
-      const { data: m } = await sb.from('memorials').select('*').eq('slug', params.slug).single()
+      const { data: m } = await sb.from('memorials').select('*').eq('slug', slug).single()
       if (m) {
         setMemorial(m)
         const { data: c } = await sb.from('comments').select('*').eq('memorial_id', m.id).order('created_at',{ascending:false})
