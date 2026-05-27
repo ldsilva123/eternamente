@@ -28,6 +28,7 @@ export default function Home() {
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center' }}>
             <Link href="/auth" style={{ padding: '14px 32px', borderRadius: 99, background: 'rgba(253,250,246,0.95)', color: 'var(--night)', fontSize: 15, fontWeight: 600, textDecoration: 'none', boxShadow: '0 4px 20px rgba(0,0,0,0.2)' }}>Create a memorial</Link>
             <Link href="/memorial" style={{ padding: '14px 32px', borderRadius: 99, background: 'rgba(255,255,255,0.15)', color: '#fff', fontSize: 15, fontWeight: 500, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.3)', backdropFilter: 'blur(4px)' }}>See example</Link>
+            <Link href="/flores" style={{ padding: '14px 32px', borderRadius: 99, background: 'var(--gold)', color: '#fff', fontSize: 15, fontWeight: 500, textDecoration: 'none', boxShadow: '0 4px 20px rgba(184,125,58,0.4)' }}>🌹 Leave flowers</Link>
           </div>
         </div>
       </div>

@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2024-06-20' })
-
 const PRODUCTS: Record<string, { name: string; price: number; emoji: string }> = {
   rosa:      { name: 'Rosa',      price: 99,  emoji: '🌹' },
   ramalhete: { name: 'Ramalhete', price: 299, emoji: '💐' },
@@ -13,6 +11,7 @@ const PRODUCTS: Record<string, { name: string; price: number; emoji: string }> =
 }
 
 export async function POST(req: NextRequest) {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2026-04-22.dahlia' })
   try {
     const { productId, message, memorialSlug } = await req.json()
     const product = PRODUCTS[productId]
