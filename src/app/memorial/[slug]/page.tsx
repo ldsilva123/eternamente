@@ -1,6 +1,7 @@
 'use client'
 export const dynamic = 'force-dynamic'
 import { useState, useEffect } from 'react'
+import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import AppShell from '@/components/AppShell'
 import CemeteryScene from '@/components/CemeteryScene'
@@ -14,8 +15,9 @@ function fmt(d: string) {
   return new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }).toUpperCase()
 }
 
-export default function MemorialPage({ params }: { params: { slug: string } }) {
-  const resolvedSlug = params?.slug || ''
+export default function MemorialPage() {
+  const params = useParams()
+  const resolvedSlug = (params?.slug as string) || ''
   const [memorial, setMemorial] = useState<Memorial | null>(null)
   const [comments, setComments] = useState<Comment[]>([])
   const [newComment, setNewComment] = useState('')
