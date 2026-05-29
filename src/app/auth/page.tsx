@@ -28,7 +28,11 @@ export default function AuthPage() {
         options: { data: { full_name: name } }
       })
       if (err) setError(err.message)
-      else setSuccess('Account created! Check your email to confirm, then sign in.')
+      else {
+        const { error: loginErr } = await sb.auth.signInWithPassword({ email, password })
+        if (!loginErr) router.push('/feed')
+        else setSuccess('Account created! Please sign in.')
+      }
     } else {
       const { error: err } = await sb.auth.signInWithPassword({ email, password })
       if (err) setError('Incorrect email or password.')
