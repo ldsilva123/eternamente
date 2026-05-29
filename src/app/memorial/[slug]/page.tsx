@@ -15,6 +15,7 @@ function fmt(d: string) {
 }
 
 export default function MemorialPage({ params }: { params: { slug: string } }) {
+  const resolvedSlug = params?.slug || ''
   const [memorial, setMemorial] = useState<Memorial | null>(null)
   const [comments, setComments] = useState<Comment[]>([])
   const [newComment, setNewComment] = useState('')
@@ -28,7 +29,7 @@ export default function MemorialPage({ params }: { params: { slug: string } }) {
     async function load() {
       try {
         const sb = createClient()
-        const { data: m, error: e } = await sb.from('memorials').select('*').eq('slug', params.slug).single()
+        const { data: m, error: e } = await sb.from('memorials').select('*').eq('slug', resolvedSlug).single()
         console.log('MEMORIAL DEBUG:', params.slug, m, e)
         if (m) {
           setMemorial(m)
